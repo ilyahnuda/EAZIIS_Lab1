@@ -10,6 +10,8 @@ class DictionaryHandler:
         self._dictionary = []
         self._create_dictionary()
 
+    def get_document(self):
+        return self._document_handler
     def _get_lexems(self) -> List[str]:
         return self._document_handler.get_lexems()
 
