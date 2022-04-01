@@ -1,4 +1,3 @@
-
 import threading
 import tkinter as tk
 from idlelib.redirector import WidgetRedirector
@@ -11,6 +10,7 @@ from model.document_handler.document_handler import DocumentHandler
 from model.lexeme_handler.lexeme_handler import pos_representation, cases_representation
 from fpdf import FPDF
 
+
 class MainWindow:
     def __init__(self):
         self._window = tk.Tk()
@@ -22,7 +22,7 @@ class MainWindow:
         self._button_open = tk.Button(self._frame_buttons, text="Открыть файл", command=self.open_file)
         self._button_append = tk.Button(self._frame_buttons, text="Добавить файл",
                                         command=self.append_file)
-        self._button_save=tk.Button(self._frame_buttons,text="Сохранить файл",command=self.save_file)
+        self._button_save = tk.Button(self._frame_buttons, text="Сохранить файл", command=self.save_file)
         self._button_search = tk.Button(self._frame_buttons, text="Поиск лексем",
                                         command=self.search)
         self._button_add = tk.Button(self._frame_buttons, text="Добавление лексемы",
@@ -218,13 +218,14 @@ class MainWindow:
         messagebox.showinfo("Помощь",
                             "Для начала работы откройте файл.\nФормат PDF.\nЯзык русский.\nВозможности поиска:"
                             " запись по лексеме или основе слова, поиск всех лексем по падежу, по части речи.")
+
     def save_file(self):
-        pdf=FPDF()
+        pdf = FPDF()
         pdf.add_page()
         pdf.add_font("Arial", "", "arial.ttf", uni=True)
-        pdf.set_font("Arial",size=8)
-        sentence= (self._handler.get_full_dictionary_string(self._handler.get_dictionary())).split("\n")
-        path=self._handler.get_document().get_file_path().split("\\")
+        pdf.set_font("Arial", size=8)
+        sentence = (self._handler.get_full_dictionary_string(self._handler.get_dictionary())).split("\n")
+        path = self._handler.get_document().get_file_path().split("\\")
         for i in sentence:
-            pdf.cell(0,5,i,ln=1)
+            pdf.cell(0, 5, i, ln=1)
         pdf.output(f"write_{path[-1]}")
